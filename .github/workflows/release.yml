@@ -107,7 +107,6 @@ jobs:
         shell: msys2 {0}
         run: |
           make CC=g++ LDFLAGS="-lOpenCL -lws2_32 -static-libgcc -static-libstdc++" CFLAGS="-c -std=c++11 -Wall -O2 -faligned-new -DCL_TARGET_OPENCL_VERSION=120"
-          mv tron-vanity tron-vanity.exe
 
       - name: Package
         shell: pwsh
