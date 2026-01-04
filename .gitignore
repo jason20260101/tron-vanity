@@ -1,0 +1,8 @@
+# Makefile artifacts
+*.o
+*.so
+cache-opencl.*
+bin
+.idea
+output
+tron-vanity
