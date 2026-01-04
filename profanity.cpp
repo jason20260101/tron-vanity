@@ -18,6 +18,21 @@
 #define CL_DEVICE_PCI_BUS_ID_NV  0x4008
 #define CL_DEVICE_PCI_SLOT_ID_NV 0x4009
 
+// AMD OpenCL extension definitions (may not be available on all platforms)
+#ifndef CL_DEVICE_TOPOLOGY_AMD
+#define CL_DEVICE_TOPOLOGY_AMD 0x4037
+#endif
+
+#ifndef CL_DEVICE_TOPOLOGY_TYPE_PCIE_AMD
+#define CL_DEVICE_TOPOLOGY_TYPE_PCIE_AMD 1
+
+typedef union {
+    struct { cl_uint type; cl_uint data[5]; } raw;
+    struct { cl_uint type; cl_char unused[17]; cl_char bus; cl_char device; cl_char function; } pcie;
+} cl_device_topology_amd;
+
+#endif
+
 #include "Dispatcher.hpp"
 #include "ArgParser.hpp"
 #include "Mode.hpp"
@@ -114,12 +129,10 @@ static std::vector<std::string> getBinaries(cl_program & clProgram) {
 }
 
 static unsigned int getUniqueDeviceIdentifier(const cl_device_id & deviceId) {
-#if defined(CL_DEVICE_TOPOLOGY_AMD)
 	auto topology = clGetWrapper<cl_device_topology_amd>(clGetDeviceInfo, deviceId, CL_DEVICE_TOPOLOGY_AMD);
 	if (topology.raw.type == CL_DEVICE_TOPOLOGY_TYPE_PCIE_AMD) {
 		return (topology.pcie.bus << 16) + (topology.pcie.device << 8) + topology.pcie.function;
 	}
-#endif
 	cl_int bus_id = clGetWrapper<cl_int>(clGetDeviceInfo, deviceId, CL_DEVICE_PCI_BUS_ID_NV);
 	cl_int slot_id = clGetWrapper<cl_int>(clGetDeviceInfo, deviceId, CL_DEVICE_PCI_SLOT_ID_NV);
 	return (bus_id << 16) + slot_id;
