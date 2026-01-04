@@ -117,3 +117,11 @@ make
 
 - 基于 [profanity2](https://github.com/1inch/profanity2) 修改
 - 原始项目 [profanity](https://github.com/johguse/profanity) by Johan Gustafsson
+
+## 交流与反馈 | Contact
+
+如有问题或建议，欢迎通过以下方式联系：
+
+For any questions or suggestions, feel free to contact:
+
+- Telegram: [@Jason20241128](https://t.me/Jason20241128)
