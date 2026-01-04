@@ -1,8 +1,30 @@
-# Makefile artifacts
+# Build output
 *.o
-*.so
-cache-opencl.*
-bin
-.idea
-output
 tron-vanity
+tron-vanity.exe
+
+# OpenCL cache
+cache-opencl.*
+
+# Release directory (local builds)
+release/
+
+# Output directory
+output/
+
+# macOS
+.DS_Store
+*.dSYM/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Windows
+*.exe
+*.dll
+Thumbs.db
+
